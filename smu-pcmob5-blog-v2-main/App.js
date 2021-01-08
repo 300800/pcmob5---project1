@@ -5,6 +5,7 @@ import SignInScreen from "./screens/SignInScreen";
 import AccountScreen from "./screens/AccountScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Stack = createStackNavigator();
 
