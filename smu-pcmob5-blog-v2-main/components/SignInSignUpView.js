@@ -104,7 +104,9 @@ export default function SignInSignUpView({ navigation, isSignIn }) {
         <View style={{ flexDirection: "row" }}>
           <TouchableOpacity
             onPress={isSignIn ? login : signup}
-            style={styles.loginButton}
+            style={[
+              (styles.loginButton,
+              ]}
           >
             <Text style={styles.buttonText}>
               {isSignIn ? "Log in" : "Sign up"}
