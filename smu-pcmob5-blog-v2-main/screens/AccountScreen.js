@@ -9,36 +9,42 @@ import {
 import { commonStyles } from "../styles/commonStyles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useUsername } from "../hooks/useAPI";
-
+import { useDispatch } from "react-redux";
+import { signOutAction } from "../redux/ducks/blogAuth";
+import { toggleDarkMode } from ../redux/ducks/accountsPrefs";
 export default function AccountScreen({ navigation }) {
   const [username, loading, error, refresh] = useUsername();
+  const dispatch = useDispatch();
 
   // signs out if the useUsername hook returns error as true
   useEffect(() => {
     if (error) {
       signOut();
     }
-  }, [error]);
+  }, [error]); // monitor the error state variable
 
   useEffect(() => {
+    console.log("Setting up navlistener");
     const removeListener = navigation.addListener("focus", () => {
       refresh(true);
     });
     return removeListener;
-  }, []);
+  }, []); // run this once on start
 
   function signOut() {
     AsyncStorage.removeItem("token");
-    navigation.navigate("SignIn");
+    dispatch(signOutAction());
   }
 
   return (
-    <View style={commonStyles.container}>
+    <View style={commonStyles.container, isDarkModeOn && { backgroundColor: "black" },
+  )}
       <Text>Account Screen</Text>
       {loading ? <ActivityIndicator /> : <Text>{username}</Text>}
+      <switch value={isDarkModeOn} onValueChange={() => setIsEnabled)} />
+
       <Button title="Sign out" onPress={signOut} />
     </View>
-  );
-}
+ 
 
 const styles = StyleSheet.create({});
