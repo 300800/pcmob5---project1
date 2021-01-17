@@ -5,16 +5,19 @@ import {
   StyleSheet,
   Text,
   View,
+  Switch,
 } from "react-native";
 import { commonStyles } from "../styles/commonStyles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useUsername } from "../hooks/useAPI";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signOutAction } from "../redux/ducks/blogAuth";
-import { toggleDarkMode } from ../redux/ducks/accountsPrefs";
+import { toggleDarkMode } from "../redux/ducks/accountsPrefs";
+
 export default function AccountScreen({ navigation }) {
   const [username, loading, error, refresh] = useUsername();
   const dispatch = useDispatch();
+  const isDarkModeOn = useSelector((state) => state.prefs.darkMode);
 
   // signs out if the useUsername hook returns error as true
   useEffect(() => {
@@ -37,14 +40,25 @@ export default function AccountScreen({ navigation }) {
   }
 
   return (
-    <View style={commonStyles.container, isDarkModeOn && { backgroundColor: "black" },
-  )}
-      <Text>Account Screen</Text>
-      {loading ? <ActivityIndicator /> : <Text>{username}</Text>}
-      <switch value={isDarkModeOn} onValueChange={() => setIsEnabled)} />
-
-      <Button title="Sign out" onPress={signOut} />
+    <View
+      style={[
+        commonStyles.container,
+        isDarkModeOn && { backgroundColor: "black" },
+      ]}
+    >
+      <Text style={isDarkModeOn && { color: "white" }}>Account Screen</Text>
+      {loading ? (
+        <ActivityIndicator />
+      ) : (
+        <Text style={isDarkModeOn && { color: "white" }}>{username}</Text>
+      )}
+      <Switch
+        value={isDarkModeOn}
+        onValueChange={() => dispatch(toggleDarkMode())}
+      />
+      <Button title="Sign out" onPress={SignOut} />
     </View>
- 
+  );
+}
 
 const styles = StyleSheet.create({});
