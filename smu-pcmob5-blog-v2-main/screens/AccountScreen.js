@@ -12,7 +12,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useUsername } from "../hooks/useAPI";
 import { useDispatch, useSelector } from "react-redux";
 import { signOutAction } from "../redux/ducks/blogAuth";
-import { toggleDarkMode } from "../redux/ducks/accountsPrefs";
+import { toggleDarkMode } from "../redux/ducks/accountPrefs";
 
 export default function AccountScreen({ navigation }) {
   const [username, loading, error, refresh] = useUsername();
