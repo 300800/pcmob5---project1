@@ -56,7 +56,7 @@ export default function AccountScreen({ navigation }) {
         value={isDarkModeOn}
         onValueChange={() => dispatch(toggleDarkMode())}
       />
-      <Button title="Sign out" onPress={SignOut} />
+      <Button title="Sign out" onPress={signOut} />
     </View>
   );
 }
