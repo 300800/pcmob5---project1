@@ -24,17 +24,13 @@ Route::get('users/{id}/{name}', function($id, $name){
 });
 */
 
-Route::get('/index', [App\Http\Controllers\PagesController::class, 'index']) ->name('index');
-  
-Route::get('/about', [App\Http\Controllers\PagesController::class, 'about']) ->name('about');
-Route::get('/services', [App\Http\Controllers\PagesController::class, 'services']) ->name('services');
+Route::get('/index', [App\Http\Controllers\PagesController::class, 'index'])->name('index');
+
+Route::get('/about', [App\Http\Controllers\PagesController::class, 'about'])->name('about');
+Route::get('/services', [App\Http\Controllers\PagesController::class, 'services'])->name('services');
+Route::get('/profiles', [App\Http\Controllers\PagesController::class, 'profiles'])->name('profiles');
 
 
-//Auth::routes();
+Auth::routes();
 
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
-
-
-
-
-
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
